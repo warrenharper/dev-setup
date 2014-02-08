@@ -1,3 +1,0 @@
-- hosts: dev
-  roles:
-    - asdf{role: dev_machine}
