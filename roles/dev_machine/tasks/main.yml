@@ -1,0 +1,91 @@
+- name: Adds PPAS for package installation
+  apt_repository: repo={{ item }} update-cache=yes
+  with_items:
+            - ppa:cassou/emacs
+            - ppa:satyajit-happy/themes
+            - ppa:webupd8team/java
+  sudo: yes
+
+# - name: Java installation | Remove previous java installations
+#   command: apt-get purge -y openjdk*
+#   sudo: yes
+  
+
+# - name: Java installation | Install Java 6 and 7
+#   apt: pkg={{ item }} state=latest
+#   with_items:
+#              - oracle-java6-installer
+#              - oracle-java7-installer
+#              - oracle-java8-installer
+#   sudo: yes
+  
+- name: Install necessary packages
+  apt: pkg={{ item }} state=latest
+  with_items:
+            - firefox
+            - openssh-server
+            - terminator
+            - python-pip
+            - alien
+            - dpkg-dev
+            - debhelper
+            - build-essential
+            - libreoffice
+            - gnome-tweak-tool
+            - git
+            - git-core
+            - meld
+            - nginx
+            - emacs24
+            - emacs24-el
+            - emacs24-common-non-dfsg
+            - php5-gd
+            - php-xml-parser
+            - php5-intl
+            - php5-curl
+            - php5-fpm
+            - php5-cli
+            - php5-cgi
+            - smbclient
+            - curl
+            - libcurl3
+            - shimmer-themes
+            - shimmer-wallpapers
+            - gnome-shell
+            - gnome-shell-theme-elegance-colors
+            - wget
+            - flashplugin-installer
+  sudo: yes
+  
+- name: Install Django
+  command: pip install django
+  sudo: yes
+
+# ## Can make this better by using vars
+- name: Git setup
+  command: git config --global user.name "Warren Harper"
+  command: git config --global user.email "warrenjharper@gmail.com"
+  command: git config --global core.editor emacs
+  command: git config --global merge.tool meld
+
+- name: Setup numix theme
+  command: gsettings set org.gnome.desktop.interface gtk-theme "Numix"
+  command: gsettings set org.gnome.desktop.wm.preferences theme "Numix"
+
+- name: Make .emacs directory
+  command: mkdir -p /home/warren/.emacs.d/
+
+- name: Copy .emacs file
+  copy: src=init.el dest=/home/warren/.emacs.d/
+
+- name: Make Terminator config directory
+  command: mkdir -p /home/warren/.config/terminator/
+
+- name: Copy Terminator config
+  copy: src=config dest=/home/warren/.config/terminator/
+
+
+
+
+
+  
