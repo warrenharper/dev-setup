@@ -32,11 +32,13 @@
 
 
 (show-paren-mode 1)
+(column-number-mode 1)
 (define-key global-map (kbd "RET") 'newline-and-indent)
 ;;Get rid of tool and menu bars
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 
+;;Package Setup
 (require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                            ("marmalade" . "http://marmalade-repo.org/packages/")
@@ -44,13 +46,14 @@
 (package-initialize)
 
 ;;Color-themes
-(load-file (expand-file-name "~/.emacs.d/elpa/color-theme-wombat+-0.0.2/color-theme-wombat+.el"))
+(require 'color-theme)
+;;(load-file (expand-file-name "~/.emacs.d/elpa/color-theme-wombat+-0.0.2/color-theme-wombat+.el"))
 ;;(load-file (expand-file-name "~/.emacs.d/elpa/zenburn-theme-20130914.1044/zenburn-theme.el"))
 ;;(load-file (expand-file-name "~/.emacs.d/elpa/color-theme-wombat-0.0.1/color-theme-wombat.el"))
 ;;(load-file (expand-file-name "~/.emacs.d/elpa/color-theme-github-0.0.3/color-theme-github.el"))
+;;(color-theme-solarized-light)
 (color-theme-monokai)
 ;;(color-theme-wombat+)
-;;(color-theme-solarized-light)
 
 ;;Status bar/mode line 
 ;;(setq-default mode-line-format nil)
@@ -62,10 +65,16 @@
 (set-scroll-bar-mode nil)
 
 ;;Set font size
-(set-face-attribute 'default nil :height 90)
+(set-face-attribute 'default nil :height 100)
 
 ;;Indention to spaces instead of spaces
 (setq-default indent-tabs-mode nil)
+
+;; Backup Policy
+(setq backup-directory-alist `(("." . "~/.saves")))
+(setq backup-by-copying t)
+(setq auto-save-list-file-prefix "~/.emacs.d/tmp/autosaves/")
+
 
 (ido-mode 1)
 (ido-ubiquitous-mode 1)
@@ -78,3 +87,4 @@
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 (global-set-key (kbd "C-x t") 'ansi-term)
+
