@@ -4,6 +4,8 @@
             - ppa:cassou/emacs
             - ppa:satyajit-happy/themes
             - ppa:webupd8team/java
+            - ppa:numix/ppa
+            
   sudo: yes
 
 # - name: Java installation | Remove previous java installations
@@ -51,6 +53,10 @@
             - libcurl3
             - shimmer-themes
             - shimmer-wallpapers
+            - numix-gtk-theme
+            - numix-icon-theme
+            - numix-icon-theme-circle
+            - numix-wallpaper-mr-numix
             - gnome-shell
             - gnome-shell-theme-elegance-colors
             - wget
@@ -71,6 +77,8 @@
 - name: Setup numix theme
   command: gsettings set org.gnome.desktop.interface gtk-theme "Numix"
   command: gsettings set org.gnome.desktop.wm.preferences theme "Numix"
+  command: gsettings set org.gnome.desktop.background picture-uri "file:///usr/share/backgrounds/Mr-Numix-16x9.png"
+  command: gsettings set org.gnome.desktop.interface icon-them "Numix-Circle"
 
 - name: Make .emacs directory
   command: mkdir -p /home/warren/.emacs.d/
