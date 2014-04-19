@@ -57,7 +57,7 @@
             - numix-icon-theme
             - numix-icon-theme-circle
             - numix-wallpaper-mr-numix
-            - gnome-shell
+            - gnome-shell-extensions
             - gnome-shell-theme-elegance-colors
             - wget
             - flashplugin-installer
@@ -79,6 +79,10 @@
   command: gsettings set org.gnome.desktop.wm.preferences theme "Numix"
   command: gsettings set org.gnome.desktop.background picture-uri "file:///usr/share/backgrounds/Mr-Numix-16x9.png"
   command: gsettings set org.gnome.desktop.interface icon-them "Numix-Circle"
+
+- name: Setup Elegance Colors
+  command: mkdir -p /home/warren/.config/elegance-colors
+  copy: src=elegance-colors.ini des=/home/warren/.config/elegance-colors/
 
 - name: Make .emacs directory
   command: mkdir -p /home/warren/.emacs.d/
