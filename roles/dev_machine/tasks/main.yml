@@ -73,6 +73,7 @@
   command: git config --global user.email "warrenjharper@gmail.com"
   command: git config --global core.editor emacs
   command: git config --global merge.tool meld
+  command: git config --global push.default simple
 
 - name: Setup numix theme
   command: gsettings set org.gnome.desktop.interface gtk-theme "Numix"
