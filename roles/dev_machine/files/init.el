@@ -180,6 +180,15 @@
       )
 (setq auto-save-default nil)
 
+;; SCSS
+(setq scss-sass-command "sass --style=compressed")
+
+;; Bell
+(setq ring-bell-function 'ignore)
+
+;; Nice Line Wrapping
+(visual-line-mode)
+
 
 
 

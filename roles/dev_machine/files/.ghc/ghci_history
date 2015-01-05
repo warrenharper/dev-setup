@@ -1,0 +1,100 @@
+lowers ['a']
+fromEnum 'c'
+import Data
+import base Data
+import base
+:t ord
+let pred :: Int -> Int; pred 0 = 0; pred (n+1) = n;
+let pred :: Int -> Int; pred 0 = 0; pred (n+1) = n
+pred 3
+pred 4
+pred 1
+let pred :: Int -> Int; pred 0 = 0; pred (n) = n + 1
+let pred :: Int -> Int; pred 0 = 0; pred (n+1) = n
+let pred :: Int -> Int; pred 0 = 0; pred (n + 1) = n
+let pred :: Int -> Int pred 0 = 0 pred (n + 1) = n
+let pred :: Int -> Int \
+let pred :: Int -> Int
+pred :: Int -> Int
+[1,2,3] ++ 4
+1 : [2,3,4]
+:t double
+let double x = x *2
+double x = x *2
+:t *
+:t tail
+it
+[1]
+it
+[]1
+[] 1
+[1,1.5..10]
+[1,1.5,..,10]
+[1,2..10]
+(,,) 1 2 3
+(,,) 1 2
+1:2:3:4:5:6:[]
+1:(2:[])
+:t t
+let t f x = f (f x)
+:t p
+let p xs = reverse xs == xs
+:t [tail, init, reverse]
+:t [(False, 'o'), (True, '1')]
+:t ['a', 'b', 'c']
+head []
+(1)
+(1,3)
+(True)
+foldl myadd 1 [1,2,4]
+foldl myadd 3 [1,2,4]
+foldl myadd [1,2,4]
+let myadd x y = x + y
+foldl double 3 [1,2,4,5]
+foldl double a [1,2,4,5]
+foldl double [1,2,4,5]
+let double x = x + x
+:t foldl
+:t fold
+:t (1,"t")
+fst (snd (1,(2,3)))
+fst (snd (1,(2,3))
+:t fst
+fst (1,2,3)
+snd (1, "Hello")
+snd (1, "Hello", "H")
+fst (1, "Hello")
+[1,2,3]
+(1, (1,2))
+id 10
+id "Hello"
+:t id
+: id
+(True, id, [1,2])
+(True, [1,2])
+(True, id, [1,2])
+(True, id [1,2])
+(1, "Hell0")
+(1,2)
+[length, head, tail]
+(1, "Hello")
+(1,2)
+(head [length]) "Hello"
+:t [length, head]
+:t [head]
+:t [length]
+:t head
+:t length 
+:t [1,2]
+:t []
+[True, "Hello"]
+:t null
+:t head
+length[length, head]
+length["Hello", "world"]
+length [[1,2], [1,2,4], [], [99]]
+length [1,2,3]
+lenght [1,2,3]
+:t length
+:t not
+:t head "Hello"

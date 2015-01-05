@@ -99,6 +99,23 @@
 - name: Copy Terminator config
   copy: src=config dest=/home/nerraw/.config/terminator/
 
+- name: Add .bashrc configs
+  lineinfile:
+    dest=~/.bashrc
+    insertafter="{{ item.lineafter }}"
+    line="{{ item.line }}"
+    with_items:
+      - { lineafter: '^export BASH_CONF.*$', line: 'export TERM=xterm-color' }
+      - { lineafter: '^export BASH_CONF.*$', line: 'PROMPT_DIRTRIM=3' }
+
+- name: Remove extra PS1 Line from .bashrc
+  lineinfile:
+    dest=~/.bashrc
+    state=absent
+    regexp="PS1=.*\$PS1\""
+      
+
+      
 
 
 
