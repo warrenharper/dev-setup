@@ -1,0 +1,14 @@
+[user]
+	name = Warren Harper
+	email = warrenjharper@gmail.com
+[merge]
+	tool = diffmerge
+[diff]
+	tool = meld
+[push]
+	default = simple
+[clean]
+	requireForce = false
+[alias]
+	diff = diff -w
+        lg = log --graph --pretty=format:'%Cred%hCreset - %C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit 
