@@ -46,8 +46,8 @@
 ; Add ~/.emacs.d to load-path
 ;;(add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/elpa/")
-;;(let ((default-directory "~/.emacs.d/github.com-packages/"))
-;;  (normal-top-level-add-subdirs-to-load-path))
+(let ((default-directory "~/.emacs.d/github.com-packages/"))
+  (normal-top-level-add-subdirs-to-load-path))
 
 
 ;;Add themes folder to custom themes list
@@ -75,7 +75,7 @@
 
 ;;Color-themes
 ;;(require 'color-theme)
-(load-theme 'wombat-ext t)
+(load-theme 'flatland t)
 
 ;;Line numbering
 (global-linum-mode 1)
@@ -116,13 +116,14 @@
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 ;; Terminals
-(setq multi-term-program "/usr/local/bin/bash")
-(setq multi-term-dedicated-select-after-open-p t)
-(global-set-key (kbd "C-x t c") 'multi-term)
-(global-set-key (kbd "C-x t n") 'multi-term-next)
-(global-set-key (kbd "C-x t p") 'multi-term-prev)
-(global-set-key (kbd "C-x t t") 'multi-term-dedicated-toggle)
-
+(global-set-key (kbd "C-x t") (lambda () (interactive) (ansi-term "/usr/local/bin/bash")))
+(defadvice term-sentinel (around my-advice-term-sentinel (proc msg))
+  (if (memq (process-status proc) '(signal exit))
+      (let ((buffer (process-buffer proc)))
+        ad-do-it
+        (kill-buffer buffer))
+    ad-do-it))
+(ad-activate 'term-sentinel)
 
 
 (global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
@@ -133,9 +134,8 @@
 ;;(set-default 'cursor-type 'hbar)
 
 ;; Power Line
-(require 'powerline)
-(powerline-default-theme)
-
+;; (require 'powerline)
+;; (powerline-default-theme)
 ;;GO MODE
 (setq gofmt-command "goimports")
 (require 'go-mode)
@@ -187,11 +187,15 @@
 (setq ring-bell-function 'ignore)
 
 ;; Nice Line Wrapping
-(visual-line-mode)
+(setq line-move-visual 80)
 
+(server-start)
 
-
-
+;; Ediff
+;; (setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+;; Set Font
+(set-face-attribute 'default nil :font "Source Code Pro")
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
