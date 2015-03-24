@@ -75,7 +75,7 @@
 
 ;;Color-themes
 ;;(require 'color-theme)
-(load-theme 'flatland t)
+(load-theme 'wombat-ext t)
 
 ;;Line numbering
 (global-linum-mode 1)
@@ -103,10 +103,10 @@
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 
-;; Smart Modeline
- (setq sml/theme 'respectful)
- (require 'smart-mode-line)
- (sml/setup)
+;; ;; Smart Modeline
+;;  (setq sml/theme 'powerline)
+;;  (require 'smart-mode-line)
+;;  (sml/setup)
 
 ;;Multiple Cursors
 (require 'multiple-cursors)
@@ -134,8 +134,9 @@
 ;;(set-default 'cursor-type 'hbar)
 
 ;; Power Line
-;; (require 'powerline)
-;; (powerline-default-theme)
+(powerline-default-theme)
+(require 'powerline)
+
 ;;GO MODE
 (setq gofmt-command "goimports")
 (require 'go-mode)
@@ -143,7 +144,7 @@
 (setenv "PATH" "/Users/warren/.cabal/bin:/Applications/ghc-7.8.3.app/Contents/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/go/bin:/Users/warren/.rvm/bin:/Users/warren/workbench/go/bin:/Users/warren/bin")
 (setenv "GOPATH" "/Users/warren/workbench/go")
 
-(load-file "$GOPATH/src/code.google.com/p/go.tools/cmd/oracle/oracle.el")
+(load-file "$GOPATH/src/golang.org/x/tools/cmd/oracle/oracle.el")
 (go-oracle-mode)
 
 
@@ -152,7 +153,9 @@
 (setq mac-command-modifier 'control)
 ;;Mac Paths
 (when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
+  (let ()
+    (setq-default default-directory "/Users/warren")
+     (exec-path-from-shell-initialize)))
 
 (put 'narrow-to-region 'disabled nil)
 ;; Full screen
@@ -169,7 +172,8 @@
 
 (setq org-enforce-todo-dependencies t)
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)")))
+      '((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)")
+        (sequence "GOAL(G)" "|" "COMPLETED(c)")))
 (setq org-log-done 'time)
 
 ;; Set project specific specs
@@ -196,9 +200,20 @@
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 ;; Set Font
 (set-face-attribute 'default nil :font "Source Code Pro")
+(setq-default line-spacing 3)
+
+;; Haskell
+(add-hook 'haskell-mode-hook 'haskell-indent-mode)
+
+
+;; IMenu
+;; Allows me to jump to functions
+(global-set-key (kbd "C-c C-f") 'imenu)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)

@@ -10,5 +10,6 @@
 [clean]
 	requireForce = false
 [alias]
+        lg = log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit 
 	diff = diff -w
-        lg = log --graph --pretty=format:'%Cred%hCreset - %C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit 
+	last-diff = diff HEAD~1 HEAD
