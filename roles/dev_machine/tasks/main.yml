@@ -3,23 +3,9 @@
   with_items:
             - ppa:cassou/emacs
             - ppa:satyajit-happy/themes
-            - ppa:webupd8team/java
             - ppa:numix/ppa
-            
+            - ppa:hvr/ghc
   sudo: yes
-
-# - name: Java installation | Remove previous java installations
-#   command: apt-get purge -y openjdk*
-#   sudo: yes
-  
-
-# - name: Java installation | Install Java 6 and 7
-#   apt: pkg={{ item }} state=latest
-#   with_items:
-#              - oracle-java6-installer
-#              - oracle-java7-installer
-#              - oracle-java8-installer
-#   sudo: yes
   
 - name: Install necessary packages
   apt: pkg={{ item }} state=latest
@@ -41,13 +27,6 @@
             - emacs24
             - emacs24-el
             - emacs24-common-non-dfsg
-            - php5-gd
-            - php-xml-parser
-            - php5-intl
-            - php5-curl
-            - php5-fpm
-            - php5-cli
-            - php5-cgi
             - smbclient
             - curl
             - libcurl3
@@ -61,19 +40,18 @@
             - gnome-shell-theme-elegance-colors
             - wget
             - flashplugin-installer
+            - software-properties-common
+            - cabal-install-1.20
+            - ghc-7.8.4 happy-1.19.4 alex.3.1.3
   sudo: yes
   
-- name: Install Django
-  command: pip install django
-  sudo: yes
-
 # ## Can make this better by using vars
 - name: Git setup
   copy: src=.gitconfig dest=/home/nerraw/
 
 - name: GHC config
   copy: src=.ghc dest=/home/nerraw/
-
+  
 - name: Setup numix theme
   command: gsettings set org.gnome.desktop.interface gtk-theme "Numix"
   command: gsettings set org.gnome.desktop.wm.preferences theme "Numix"
@@ -107,12 +85,33 @@
       - { lineafter: '^export BASH_CONF.*$', line: 'export TERM=xterm-color' }
       - { lineafter: '^export BASH_CONF.*$', line: 'PROMPT_DIRTRIM=3' }
 
+- name: Add Haskell Paths
+  lineinfile:
+    dest=~/.bashrc
+    insertafter=EOF
+    line="export PATH=$PATH:~/.cabal/bin:/opt/cabal/1.20/bin:/opt/ghc/7.8.4/bin:/opt/happy/1.19.4/bin:/opt/alex/3.1.3/bin"
+
+- name: Get Go tar
+  get_url: url=https://storage.googleapis.com/golang/go{{ go_version }}.linux-amd64.tar.gz dest=/tmp
+
+- name: Install GO
+  command: tar -C /usr/local -xzf /tmp/go{{ go_version }}.linux-amd64.tar.gz
+  sudo: yes
+  
+- name: Add GOPATHS
+  lineinfile:
+    dest={{ item.file }}
+    insertafter=EOF
+    line={{ item.line }}
+    with_items:
+      - { file: '/etc/profile', line: 'export $PATH:/usr/local/go' }
+      - { file: '~/.bashrc', line: 'export PATH=$PATH:$HOME/go' }
+          
 - name: Remove extra PS1 Line from .bashrc
   lineinfile:
     dest=~/.bashrc
     state=absent
     regexp="PS1=.*\$PS1\""
-      
 
       
 
