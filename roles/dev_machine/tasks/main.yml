@@ -67,8 +67,11 @@
 - name: Make .emacs directory
   command: mkdir -p /home/nerraw/.emacs.d/
 
-- name: Copy .emacs file
-  copy: src=init.el dest=/home/nerraw/.emacs.d/
+- name: Copy .emacs files
+  copy: src="{{ item }}" dest=/home/nerraw/.emacs.d/
+  with_items:
+    - init.el
+    - lisp
 
 - name: Make Terminator config directory
   command: mkdir -p /home/nerraw/.config/terminator/
