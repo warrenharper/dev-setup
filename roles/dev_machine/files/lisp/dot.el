@@ -80,14 +80,17 @@
 
 (use-package tramp-term
   ;; Tramp Terminal
-  :init (require 'tramp-term)
+  :init (progn
+           (setq auto-revert-remote-files t)
+           (require 'tramp-term))
   :config (defalias 'ssh 'tramp-term))
 
 
 
 
 (use-package magit
-  :ensure t)
+  :ensure t
+  :init (setq magit-last-seen-setup-instructions "1.4.0"))
 
 (use-package powerline
   :ensure t
@@ -98,9 +101,10 @@
 (use-package go-mode
   ;; GO Mode for editing go programs
   :ensure t
-  :init (let (( gopath (getenv "GOPATH")))
+  :mode "\\.go\\'"
+  :init (require 'go-mode)
+  :config (let (( gopath (getenv "GOPATH")))
           (setq gofmt-command "goimports")
-          (require 'go-mode)
           (add-hook 'before-save-hook 'gofmt-before-save)
           (load-file (concat gopath "/src/golang.org/x/tools/cmd/oracle/oracle.el"))
           (setq go-oracle-command (concat gopath "/bin/oracle"))))
@@ -108,15 +112,22 @@
 
 
 (use-package auto-complete
+  :ensure t)
+
+(use-package go-autocomplete
   :ensure t
-  :config (progn
+  :requires auto-complete
+  :init (progn
+            (require 'go-autocomplete)
             (require 'auto-complete-config)
             (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)))
 
+
 (use-package go-eldoc
+  :requires go-autocomplete
   :init (progn
-            (require 'go-eldoc)
-            (add-hook 'go-mode-hook 'go-eldoc-setup)))
+          (require 'go-eldoc)
+          (add-hook 'go-mode-hook 'go-eldoc-setup)))
 
 (use-package org
   :config (progn
@@ -125,6 +136,7 @@
                   '((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)")
                     (sequence "GOAL(g)" "WAITING...(w)" "|" "COMPLETED(c)")))
             (setq org-log-done 'time)
+            (setq org-enforce-todo-checkbox-dependencies t)
             (org-babel-do-load-languages
              'org-babel-load-languages
              '((emacs-lisp . t)
@@ -132,7 +144,8 @@
             ;; Syntax highlighting in code blocks
             (setq org-src-fontify-natively t)
             ;; Opens appointment reminders in current window
-            (setq appt-display-format 'window)))
+            (setq appt-display-format 'window)
+            (setq appt-display-duration 30)))
 
 (use-package web-mode
   :ensure t
@@ -144,6 +157,7 @@
 
 (use-package scss-mode
   :ensure t
+  :mode "\\.scss\\'"
   :init (setq scss-sass-command "sass --style=compressed"))
 
 
@@ -156,6 +170,46 @@
 
 (use-package wgrep
   :init (require 'wgrep))
+
+(use-package ansible
+  :ensure t
+  :defer t)
+
+(use-package ansible-doc
+  :ensure t
+  :defer t)
+
+(use-package markdown-mode
+  :ensure t
+  :mode "\\.md\\'")
+
+(use-package markdown-mode+
+  :ensure t
+  :mode "\\.md\\'")
+
+(use-package nginx-mode
+  :ensure t
+  :defer t)
+
+(use-package rainbow-mode
+  :ensure t
+  :config (add-hook 'web-mode-hook 'rainbow-mode))
+
+(use-package rust-mode
+  :ensure t
+  :mode "\\.rs\\'")
+
+(use-package toml-mode
+  :ensure t
+  :mode "\\.toml\\'")
+
+(use-package yaml-mode
+  :ensure t
+  :mode "\\.yml\\'")
+
+
+  
+
 
 (provide 'dot)
 

@@ -47,7 +47,6 @@
 (global-set-key (kbd "C-c C-f") 'imenu)
 
 ;; Desktop
-(desktop-save-mode t)
 (global-set-key (kbd "C-c C-d c") 'desktop-clear)
 (global-set-key (kbd "C-c C-d s") 'desktop-save)
 (global-set-key (kbd "C-c C-d r") 'desktop-remove) 
