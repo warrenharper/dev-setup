@@ -42,6 +42,9 @@
 ;; Allows me to jump to functions
 (global-set-key (kbd "C-c C-f") 'imenu)
 
+;; Frames
+(setq pop-up-windows t)
+
 ;; Desktop
 (global-set-key (kbd "C-c C-d c") 'desktop-clear)
 (global-set-key (kbd "C-c C-d s") 'desktop-save)
