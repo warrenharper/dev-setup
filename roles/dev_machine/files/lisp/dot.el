@@ -105,8 +105,13 @@
 (use-package powerline
   :ensure t
   :init (progn
-          (powerline-default-theme)
-          (require 'powerline)))
+
+          (require 'powerline)
+          (setq powerline-default-separator 'utf-8)
+          (powerline-default-theme)))
+
+
+
 
 (use-package go-mode
   ;; GO Mode for editing go programs
