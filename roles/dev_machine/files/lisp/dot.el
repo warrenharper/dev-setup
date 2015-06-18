@@ -59,7 +59,11 @@
 
 
 (use-package term
-  ;; Terminal
+	     ;; Terminal
+	     :init (add-hook 'term-mode-hook (lambda ()
+					       "Remove global-linum-mode to stop flashing and line-spacing to fix less"
+					       (linum-mode -1)
+					       (set (make-local-variable 'line-spacing) nil)))
   :config (progn
             ;; Open terminal only if one doesn't exist
             (defun wh-ansi-term ()

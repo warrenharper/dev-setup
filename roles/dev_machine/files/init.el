@@ -17,10 +17,9 @@
 (setq ring-bell-function 'ignore)
 
 
-;; Display
+;;Display
 (show-paren-mode 1)
 (column-number-mode 1)
-(global-linum-mode 1)
 (set-scroll-bar-mode nil)
 (set-face-attribute 'default nil :height 140)
 (set-face-attribute 'default nil :font "Source Code Pro")
@@ -37,9 +36,6 @@
               tab-width 4)
 
 
-;; Nice Line Wrapping
-(setq visual-line-mode 80)
-(global-visual-line-mode)
 
 
 ;; IMenu
