@@ -145,10 +145,13 @@
   :config (progn
             (setq org-enforce-todo-dependencies t)
             (setq org-todo-keywords
-                  '((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)")
-                    (sequence "GOAL(g)" "WAITING...(w)" "|" "COMPLETED(c)")))
+                  '((sequence "TODO(t)" "|" "DONE(d)")))
             (setq org-log-done 'time)
             (setq org-enforce-todo-checkbox-dependencies t)
+            ;; Recursive count of todos
+            (setq org-hierarchical-todo-statistics nil)
+            (setq org-checkbox-hierarchical-statistics nil)
+            
             (org-babel-do-load-languages
              'org-babel-load-languages
              '((emacs-lisp . t)
@@ -156,6 +159,13 @@
             ;; Syntax highlighting in code blocks
             (setq org-src-fontify-natively t)
             ;; Opens appointment reminders in current window
+            (add-hook 'org-after-todo-statistics-hook (lambda(n-done n-not-done)
+                                                       "Switch entry to DONE when all subentries are done, to TODO otherwise"
+                                                       (let (org-log-done org-log-status)
+                                                         (org-todo (if (= n-not-done 0)
+                                                                       "DONE"
+                                                                     (org-get-todo-sequence-head (org-get-todo-state)))))))
+
             (setq appt-display-format 'window)
             (setq appt-display-duration 30)))
 
