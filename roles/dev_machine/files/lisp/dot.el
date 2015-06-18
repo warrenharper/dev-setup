@@ -112,12 +112,14 @@
   ;; GO Mode for editing go programs
   :ensure t
   :mode "\\.go\\'"
-  :init (require 'go-mode)
   :config (let (( gopath (getenv "GOPATH")))
-          (setq gofmt-command "goimports")
-          (add-hook 'before-save-hook 'gofmt-before-save)
-          (load-file (concat gopath "/src/golang.org/x/tools/cmd/oracle/oracle.el"))
-          (setq go-oracle-command (concat gopath "/bin/oracle"))))
+            (require 'go-mode)
+            (setq gofmt-command "goimports")
+            (add-hook 'before-save-hook 'gofmt-before-save)
+            (load-file (concat gopath "/src/golang.org/x/tools/cmd/oracle/oracle.el"))
+            (setq go-oracle-command (concat gopath "/bin/oracle"))
+            (add-hook 'go-mode-hook (lambda ()
+                                      (set (make-local-variable 'compile-command) "go build")))))
 
 
 
@@ -128,9 +130,9 @@
   :ensure t
   :requires auto-complete
   :init (progn
-            (require 'go-autocomplete)
-            (require 'auto-complete-config)
-            (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)))
+          (require 'go-autocomplete)
+          (require 'auto-complete-config)
+          (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)))
 
 
 (use-package go-eldoc
