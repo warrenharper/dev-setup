@@ -17,6 +17,11 @@
           ))
 
 
+(use-package diminish
+  :ensure t
+  )
+          
+
 (use-package zenburn-theme
   ;; Dark theme
   :ensure t
@@ -85,8 +90,8 @@
 (use-package tramp-term
   ;; Tramp Terminal
   :init (progn
-           (setq auto-revert-remote-files t)
-           (require 'tramp-term))
+          (setq auto-revert-remote-files t)
+          (require 'tramp-term))
   :config (defalias 'ssh 'tramp-term))
 
 
@@ -94,6 +99,7 @@
 
 (use-package magit
   :ensure t
+  :diminish magit-auto-revert-mode
   :init (setq magit-last-seen-setup-instructions "1.4.0"))
 
 (use-package powerline
@@ -197,6 +203,7 @@
 
 (use-package rainbow-mode
   :ensure t
+  :diminish rainbow-mode
   :config (add-hook 'web-mode-hook 'rainbow-mode))
 
 (use-package rust-mode
@@ -211,8 +218,17 @@
   :ensure t
   :mode "\\.yml\\'")
 
+(use-package elec-pair
+  :init (electric-pair-mode))
 
-  
+(use-package simple
+  :diminish visual-line-mode
+  :init (progn
+          ;; Nice Line Wrapping
+          (setq visual-line-mode 80)
+          (global-visual-line-mode)))
+
+
 
 
 (provide 'dot)
