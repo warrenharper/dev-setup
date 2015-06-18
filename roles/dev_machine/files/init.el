@@ -45,6 +45,10 @@
 ;; Frames
 (setq pop-up-windows t)
 
+;; Add time to modebar
+(setq display-time-string-forms '(24-hours "." minutes))
+(display-time)
+
 ;; Desktop
 (global-set-key (kbd "C-c C-d c") 'desktop-clear)
 (global-set-key (kbd "C-c C-d s") 'desktop-save)
