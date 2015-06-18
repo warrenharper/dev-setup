@@ -66,16 +66,6 @@
                            ("melpa" . "http://melpa.milkbox.net/packages/")))
 (package-initialize)
 
-
-
-
-
-
-
-
-
-
-
 (require 'dot)
 ;;Mac Environment
 (when (memq window-system '(mac ns))
@@ -83,4 +73,3 @@
 
 
 (server-start)
-
