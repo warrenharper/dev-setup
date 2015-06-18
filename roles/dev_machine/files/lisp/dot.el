@@ -176,6 +176,19 @@
           (setq web-mode-engines-alist
                 '(("go" . "\\.html\\'")))))
 
+(use-package js2-mode
+  :ensure t
+  :mode "\\.js\\'"
+  :config (add-hook 'js2-mode-hook (lambda()
+                                     "Disable js2 toggle hide functions"
+                                     (local-unset-key (kbd "C-c C-f"))
+                                     (js2-minor-mode))))
+            
+                                    
+
+
+
+
 
 (use-package scss-mode
   :ensure t
