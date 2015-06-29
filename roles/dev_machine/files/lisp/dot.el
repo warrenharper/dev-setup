@@ -13,8 +13,7 @@
           (setq-default default-directory "/Users/warren")
           (exec-path-from-shell-initialize)
           (exec-path-from-shell-copy-env "GOPATH")
-          (setenv "PATH" "/Users/warren/.cabal/bin:/Applications/ghc-7.8.3.app/Contents/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/go/bin:/Users/warren/.rvm/bin:/Users/warren/workbench/go/bin:/Users/warren/bin")
-          ))
+          (exec-path-from-shell-copy-env "PATH")))
 
 
 (use-package diminish
