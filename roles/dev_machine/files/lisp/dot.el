@@ -223,10 +223,6 @@
   :ensure t
   :mode "\\.md\\'")
 
-(use-package markdown-mode+
-  :ensure t
-  :mode "\\.md\\'")
-
 (use-package nginx-mode
   :ensure t
   :defer t)
