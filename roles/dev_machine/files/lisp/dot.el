@@ -100,7 +100,6 @@
 
 (use-package magit
   :ensure t
-  :diminish magit-auto-revert-mode
   :init (setq magit-last-seen-setup-instructions "1.4.0"))
 
 (use-package powerline
