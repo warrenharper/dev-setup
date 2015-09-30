@@ -21,10 +21,10 @@
   )
           
 
-(use-package zenburn-theme
+(use-package monokai-theme
   ;; Dark theme
   :ensure t
-  :config (load-theme 'zenburn t))
+  :config (load-theme 'monokai t))
 
 (use-package ido
   ;; Nice mini-buffer
