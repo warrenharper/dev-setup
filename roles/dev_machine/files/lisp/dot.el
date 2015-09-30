@@ -230,7 +230,9 @@
 (use-package rainbow-mode
   :ensure t
   :diminish rainbow-mode
-  :config (add-hook 'web-mode-hook 'rainbow-mode))
+  :init (progn
+          (add-hook 'web-mode-hook 'rainbow-mode)
+          (add-hook 'scss-mode-hook 'rainbow-mode)))
 
 (use-package rust-mode
   :ensure t
