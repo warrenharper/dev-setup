@@ -29,7 +29,9 @@
 (use-package ido
   ;; Nice mini-buffer
   :ensure t
-  :init (ido-mode 1))
+  :init (progn
+          (require 'ido)
+          (ido-mode t)))
 
 (use-package ido-ubiquitous
   ;; ido ubiquitously
