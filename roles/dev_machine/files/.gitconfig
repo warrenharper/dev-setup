@@ -2,7 +2,7 @@
 	name = Warren Harper
 	email = warrenjharper@gmail.com
 [merge]
-	tool = diffmerge
+	tool = meld
 [diff]
 	tool = meld
 [push]
@@ -15,3 +15,5 @@
 	last-diff = diff HEAD~1 HEAD
 [branch]
 	autosetuprebase = always
+[color]
+	ui = true
