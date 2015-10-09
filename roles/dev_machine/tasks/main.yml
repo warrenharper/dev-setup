@@ -118,12 +118,12 @@
 
 - name: Add .bashrc configs
   lineinfile:
-    dest=~/.bashrc
-    insertafter="{{ item.lineafter }}"
-    line="{{ item.line }}"
-    with_items:
-      - { lineafter: '^export BASH_CONF.*$', line: 'export TERM=xterm-color' }
-      - { lineafter: '^export BASH_CONF.*$', line: 'PROMPT_DIRTRIM=3' }
+    dest: ~/.bashrc
+    insertafter: "{{ item.lineafter }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { lineafter: '^export BASH_CONF.*$', line: 'export TERM=xterm-color' }
+    - { lineafter: '^export BASH_CONF.*$', line: 'PROMPT_DIRTRIM=3' }
 
 - name: Add Haskell Paths
   lineinfile:
@@ -140,12 +140,13 @@
   
 - name: Add GOPATHS
   lineinfile:
-    dest={{ item.file }}
+    dest="{{ item.file }}"
     insertafter=EOF
-    line={{ item.line }}
-    with_items:
-      - { file: '/etc/profile', line: 'export $PATH:/usr/local/go' }
-      - { file: '~/.bashrc', line: 'export PATH=$PATH:$HOME/go' }
+    line="{{ item.line }}"
+  with_items:
+    - { file: '/etc/profile', line: 'export $PATH:/usr/local/go' }
+    - { file: '~/.bashrc', line: 'export PATH=$PATH:$HOME/go' }
+  sudo: yes
           
 - name: Remove extra PS1 Line from .bashrc
   lineinfile:
