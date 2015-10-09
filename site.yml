@@ -3,4 +3,4 @@
     - {role: dev_machine}
 
   vars:
-    go_version: 1.4.2
+    go_version: 1.5.1
