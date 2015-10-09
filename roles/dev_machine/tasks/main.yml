@@ -7,41 +7,42 @@
   sudo: yes
   
 - name: Install necessary packages
-  apt: pkg={{ item }} state=latest
+  apt: pkg="{{ item }}" state=latest
   with_items:
-            - firefox
-            - openssh-server
-            - terminator
-            - python-pip
-            - alien
-            - dpkg-dev
-            - debhelper
-            - build-essential
-            - libreoffice
-            - gnome-tweak-tool
-            - git
-            - git-core
-            - meld
-            - nginx
-            - emacs24
-            - emacs24-el
-            - emacs24-common-non-dfsg
-            - smbclient
-            - curl
-            - libcurl3
-            - shimmer-themes
-            - shimmer-wallpapers
-            - numix-gtk-theme
-            - numix-icon-theme
-            - numix-icon-theme-circle
-            - numix-wallpaper-mr-numix
-            - gnome-shell-extensions
-            - gnome-shell-theme-elegance-colors
-            - wget
-            - flashplugin-installer
-            - software-properties-common
-            - cabal-install-1.20
-            - ghc-7.8.4 happy-1.19.4 alex.3.1.3
+    - firefox
+    - openssh-server
+    - terminator
+    - python-pip
+    - alien
+    - dpkg-dev
+    - debhelper
+    - build-essential
+    - libreoffice
+    - git
+    - git-core
+    - meld
+    - nginx
+    - smbclient
+    - curl
+    - libcurl3
+    - wget
+    - flashplugin-installer
+    - software-properties-common
+    - cabal-install-1.20
+    - ghc-7.8.4
+    - happy-1.19.5
+    - alex-3.1.4
+    - gnome-tweak-tool
+    - shimmer-themes
+    - shimmer-wallpapers
+    - numix-gtk-theme
+    - numix-icon-theme
+    - numix-icon-theme-circle
+    - numix-wallpaper-mr-numix
+    - gnome-shell-extensions
+    - gnome-shell-theme-elegance-colors
+  sudo: yes
+
 - name: Emacs build-deps
   apt:
     name: emacs24
