@@ -1,46 +1,12 @@
 - name: Adds PPAS for package installation
   apt_repository: repo={{ item }} update-cache=yes
-  with_items:
-            - ppa:satyajit-happy/themes
-            - ppa:numix/ppa
-            - ppa:hvr/ghc
+  with_items: "{{ppa_repositories}}"
+            
   sudo: yes
   
 - name: Install necessary packages
   apt: pkg="{{ item }}" state=latest
-  with_items:
-    - firefox
-    - openssh-server
-    - terminator
-    - python-pip
-    - alien
-    - dpkg-dev
-    - debhelper
-    - build-essential
-    - libreoffice
-    - git
-    - git-core
-    - meld
-    - nginx
-    - smbclient
-    - curl
-    - libcurl3
-    - wget
-    - flashplugin-installer
-    - software-properties-common
-    - cabal-install-1.20
-    - ghc-7.8.4
-    - happy-1.19.5
-    - alex-3.1.4
-    - gnome-tweak-tool
-    - shimmer-themes
-    - shimmer-wallpapers
-    - numix-gtk-theme
-    - numix-icon-theme
-    - numix-icon-theme-circle
-    - numix-wallpaper-mr-numix
-    - gnome-shell-extensions
-    - gnome-shell-theme-elegance-colors
+  with_items: "{{packages}}"
   sudo: yes
 
 - name: Emacs build-deps
@@ -82,7 +48,6 @@
     dest: /usr/share/applications/
   sudo: yes
   
-# ## Can make this better by using vars
 - name: Git setup
   copy: src=.gitconfig dest=/home/nerraw/
 
@@ -148,6 +113,16 @@
     - { file: '~/.bashrc', line: 'export PATH=$PATH:$HOME/go' }
     - { file: '~/.bashrc', line: 'export GOPATH=$HOME/go'}
   sudo: yes
+
+
+- name: Create GOPATH
+  file:
+    path: "{{go_path}}"
+    
+- name: Install go packages
+  command: /usr/local/go/bin/go get {{item}}
+  enviroment:
+    GOPATH: "{{go_path}}"
           
 - name: Remove extra PS1 Line from .bashrc
   lineinfile:
