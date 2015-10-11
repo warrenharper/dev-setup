@@ -24,6 +24,8 @@ packages:
   - flashplugin-installer
   - software-properties-common
   - cabal-install-1.20
+  - xmonad
+  - dmenu
   - ghc-7.8.4
   - happy-1.19.5
   - alex-3.1.4
