@@ -13,8 +13,15 @@
       backup-inhibited t)
 (global-auto-revert-mode t)
 (global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
-(global-set-key (kbd "C-x r") 'rename-buffer)
+;;(global-set-key (kbd "C-x r") 'rename-buffer)
 (setq ring-bell-function 'ignore)
+
+
+;; Define custom keymap
+(define-prefix-command 'wh-keymap)
+(global-set-key (kbd "C-o") 'wh-keymap)
+(define-key wh-keymap (kbd "r") 'rename-buffer)
+
 
 
 ;;Display
