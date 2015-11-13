@@ -21,10 +21,10 @@
   )
           
 
-(use-package monokai-theme
+(use-package material-theme
   ;; Dark theme
   :ensure t
-  :config (load-theme 'monokai t))
+  :config (load-theme 'material t))
 
 (use-package ido
   ;; Nice mini-buffer
@@ -100,7 +100,11 @@
 
 (use-package magit
   :ensure t
-  :init (setq magit-last-seen-setup-instructions "1.4.0"))
+  :init (progn
+          (setq magit-last-seen-setup-instructions "1.4.0")
+          (define-key wh-keymap (kbd "g") 'magit-status)))
+
+
 
 (use-package powerline
   :ensure t
@@ -124,7 +128,9 @@
             (load-file (concat gopath "/src/golang.org/x/tools/cmd/oracle/oracle.el"))
             (setq go-oracle-command (concat gopath "/bin/oracle"))
             (add-hook 'go-mode-hook (lambda ()
-                                      (set (make-local-variable 'compile-command) "go build")))))
+                                      (set (make-local-variable 'compile-command) "go build")
+                                      (subword-mode t)))))
+
 
 
 
