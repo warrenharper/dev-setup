@@ -118,11 +118,13 @@
 - name: Create GOPATH
   file:
     path: "{{go_path}}"
+    state: directory
     
 - name: Install go packages
   command: /usr/local/go/bin/go get {{item}}
-  enviroment:
+  environment:
     GOPATH: "{{go_path}}"
+  with_items: go_packages
           
 - name: Remove extra PS1 Line from .bashrc
   lineinfile:
