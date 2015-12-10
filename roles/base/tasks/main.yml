@@ -1,0 +1,10 @@
+- name: Adds PPAS for package installation
+  apt_repository: repo={{ item }} update-cache=yes
+  with_items: "{{ppa_repositories}}"
+            
+  sudo: yes
+  
+- name: Install necessary packages
+  apt: pkg="{{ item }}" state=latest
+  with_items: "{{packages}}"
+  sudo: yes

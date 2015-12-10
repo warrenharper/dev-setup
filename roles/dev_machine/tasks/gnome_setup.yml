@@ -1,0 +1,11 @@
+- name: Setup numix theme
+  command: gsettings set org.gnome.desktop.interface gtk-theme "Numix"
+  command: gsettings set org.gnome.desktop.wm.preferences theme "Numix"
+  command: gsettings set org.gnome.desktop.background picture-uri "file:///usr/share/backgrounds/Mr-Numix-16x9.png"
+  command: gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
+
+- name: Setup Elegance Colors
+  command: mkdir -p /home/nerraw/.config/elegance-colors
+
+- name: Install Elegance Colors Config
+  copy: src=elegance-colors.ini dest=/home/nerraw/.config/elegance-colors/

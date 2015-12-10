@@ -1,6 +1,10 @@
 - hosts: dev
   roles:
-    - {role: dev_machine}
+    - base
+    - emacs
+    - go
+    - dotfiles
+    - gnome
 
   vars:
     go_version: 1.5.1

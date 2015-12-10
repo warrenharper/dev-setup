@@ -1,2 +1,2 @@
 [dev]
-dev-machine ansible_ssh_host=192.168.0.9 ansible_ssh_user=nerraw
+"{{ ip }}" ansible_ssh_user={{dev_user}}

@@ -1,0 +1,31 @@
+- name: Install stow
+  apt:
+    update_cache: yes
+    state: latest
+    name: stow
+  sudo: yes
+
+
+- name: Get dotfiles
+  git:
+    repo: https://github.com/wrrn/dotfiles.git
+    dest: ~/dotfiles
+
+
+- name: Register existing dotfiles to be stowed
+  command: find . -mindepth 2 -maxdepth 2 -not -path "./.git/*" -exec basename {} \;
+  register: potential_dotfiles
+  args:
+    chdir: ~/dotfiles
+
+- name: Back up existing dotfiles
+  command: mv -f {{ item }} {{item}}.bak
+  with_items: potential_dotfiles.stdout_lines
+  ignore_errors: yes
+
+- name: Run stow on dotfiles
+  shell: find .  -maxdepth 1 -type d -not -path . -not -name .git -exec basename {} \; | xargs stow
+  args:
+    chdir: ~/dotfiles
+
+    

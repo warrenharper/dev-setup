@@ -1,140 +1,28 @@
-- name: Adds PPAS for package installation
-  apt_repository: repo={{ item }} update-cache=yes
-  with_items: "{{ppa_repositories}}"
-            
-  sudo: yes
+tasks:
+  - include: package_install.yml
+  - include: emacs_install.yml
+  - include: go_install.yml
+  - include: dot_files.yml
+  - include: gnome_setup.yml
+
+# - name: Git setup
+#   copy: src=.gitconfig dest=/home/nerraw/
+
+# - name: GHC config
+#   copy: src=.ghc dest=/home/nerraw/
   
-- name: Install necessary packages
-  apt: pkg="{{ item }}" state=latest
-  with_items: "{{packages}}"
-  sudo: yes
 
-- name: Emacs build-deps
-  apt:
-    name: emacs24
-    state: build-dep
-  sudo: yes
+# - name: Make .emacs directory
+#   command: mkdir -p /home/nerraw/.emacs.d/
 
-- name: Get Emacs
-  get_url:
-    url: http://ftp.gnu.org/gnu/emacs/emacs-24.5.tar.gz
-    dest: /tmp/emacs.tar.gz
+# - name: Copy .emacs files
+#   copy: src="{{ item }}" dest=/home/nerraw/.emacs.d/
+#   with_items:
+#     - init.el
+#     - lisp
 
-- name: Untar emacs
-  unarchive:
-    copy: no
-    dest: /tmp/
-    src: /tmp/emacs.tar.gz
+# - name: Make Terminator config directory
+#   command: mkdir -p /home/nerraw/.config/terminator/
 
-- name: Configure emacs build
-  command: ./configure
-  args:
-    chdir: /tmp/emacs-24.5
-
-- name: Make emacs
-  command: make
-  args:
-    chdir: /tmp/emacs-24.5
-
-- name: Install emacs
-  command: make install
-  args:
-    chdir: /tmp/emacs-24.5
-  sudo: yes
-
-- name: Add Emacs to applications
-  copy:
-    src: Emacs-24.desktop
-    dest: /usr/share/applications/
-  sudo: yes
-  
-- name: Git setup
-  copy: src=.gitconfig dest=/home/nerraw/
-
-- name: GHC config
-  copy: src=.ghc dest=/home/nerraw/
-  
-- name: Setup numix theme
-  command: gsettings set org.gnome.desktop.interface gtk-theme "Numix"
-  command: gsettings set org.gnome.desktop.wm.preferences theme "Numix"
-  command: gsettings set org.gnome.desktop.background picture-uri "file:///usr/share/backgrounds/Mr-Numix-16x9.png"
-  command: gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
-
-- name: Setup Elegance Colors
-  command: mkdir -p /home/nerraw/.config/elegance-colors
-
-- name: Install Elegance Colors Config
-  copy: src=elegance-colors.ini dest=/home/nerraw/.config/elegance-colors/
-
-- name: Make .emacs directory
-  command: mkdir -p /home/nerraw/.emacs.d/
-
-- name: Copy .emacs files
-  copy: src="{{ item }}" dest=/home/nerraw/.emacs.d/
-  with_items:
-    - init.el
-    - lisp
-
-- name: Make Terminator config directory
-  command: mkdir -p /home/nerraw/.config/terminator/
-
-- name: Copy Terminator config
-  copy: src=config dest=/home/nerraw/.config/terminator/
-
-- name: Add .bashrc configs
-  lineinfile:
-    dest: ~/.bashrc
-    insertafter: "{{ item.lineafter }}"
-    line: "{{ item.line }}"
-  with_items:
-    - { lineafter: '^export BASH_CONF.*$', line: 'export TERM=xterm-color' }
-    - { lineafter: '^export BASH_CONF.*$', line: 'PROMPT_DIRTRIM=3' }
-
-- name: Add Haskell Paths
-  lineinfile:
-    dest=~/.bashrc
-    insertafter=EOF
-    line="export PATH=$PATH:~/.cabal/bin:/opt/cabal/1.20/bin:/opt/ghc/7.8.4/bin:/opt/happy/1.19.5/bin:/opt/alex/3.1.4/bin"
-
-- name: Get Go tar
-  get_url: url=https://storage.googleapis.com/golang/go{{ go_version }}.linux-amd64.tar.gz dest=/tmp
-
-- name: Install GO
-  command: tar -C /usr/local -xzf /tmp/go{{ go_version }}.linux-amd64.tar.gz
-  sudo: yes
-  
-- name: Add GOPATHS
-  lineinfile:
-    dest="{{ item.file }}"
-    insertafter=EOF
-    line="{{ item.line }}"
-  with_items:
-    - { file: '/etc/profile', line: 'export PATH=$PATH:/usr/local/go/bin' }
-    - { file: '~/.bashrc', line: 'export PATH=$PATH:$HOME/go' }
-    - { file: '~/.bashrc', line: 'export GOPATH=$HOME/go'}
-  sudo: yes
-
-
-- name: Create GOPATH
-  file:
-    path: "{{go_path}}"
-    state: directory
-    
-- name: Install go packages
-  command: /usr/local/go/bin/go get {{item}}
-  environment:
-    GOPATH: "{{go_path}}"
-  with_items: go_packages
-          
-- name: Remove extra PS1 Line from .bashrc
-  lineinfile:
-    dest=~/.bashrc
-    state=absent
-    regexp="PS1=.*\$PS1\""
-
-      
-
-
-
-
-  
+# - name: Copy Terminator config
+#   copy: src=config dest=/home/nerraw/.config/terminator/
