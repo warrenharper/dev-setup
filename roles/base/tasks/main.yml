@@ -8,3 +8,4 @@
   apt: pkg="{{ item }}" state=latest
   with_items: "{{packages}}"
   sudo: yes
+  

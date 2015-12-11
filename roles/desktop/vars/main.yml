@@ -1,0 +1,9 @@
+desktop_packages:
+  - firefox
+  - terminator
+  - libreoffice
+  - xmonad
+  - dmenu
+  #- flashplugin-installer
+
+terminator_location: ~/.config/terminator
