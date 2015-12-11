@@ -3,12 +3,14 @@ ppa_repositories:
   
 packages:
   - openssh-server
+  - python3
   - python-pip
   - alien
   - dpkg-dev
   - debhelper
   - build-essential
   - git
+  - mercurial
   - git-core
   - meld
   - nginx
