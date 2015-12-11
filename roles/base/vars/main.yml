@@ -1,6 +1,4 @@
 ppa_repositories:
-  - ppa:satyajit-happy/themes
-  - ppa:numix/ppa
   - ppa:hvr/ghc
   
 packages:
@@ -30,12 +28,3 @@ packages:
   - happy-1.19.5
   - alex-3.1.4
   - stow
-  - gnome-tweak-tool
-  - shimmer-themes
-  - shimmer-wallpapers
-  - numix-gtk-theme
-  - numix-icon-theme
-  - numix-icon-theme-circle
-  - numix-wallpaper-mr-numix
-  - gnome-shell-extensions
-  - gnome-shell-theme-elegance-colors

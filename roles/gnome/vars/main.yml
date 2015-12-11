@@ -1,0 +1,15 @@
+gnome_ppa_repos:
+  - ppa:satyajit-happy/themes
+  - ppa:numix/ppa
+  
+gnome_packages:
+  - gnome
+  - gnome-tweak-tool
+  - shimmer-themes
+  - shimmer-wallpapers
+  - numix-gtk-theme
+  - numix-icon-theme
+  - numix-icon-theme-circle
+  - numix-wallpaper-mr-numix
+  - gnome-shell-extensions
+  - gnome-shell-theme-elegance-colors

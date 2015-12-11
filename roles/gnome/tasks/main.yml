@@ -1,3 +1,14 @@
+- name: Add gnome specific ppas
+  apt_repository: repo={{ item }} update-cache=yes
+  with_items: "{{gnome_ppa_repos}}"
+            
+  sudo: yes
+  
+- name: Install necessary gnome_packages
+  apt: pkg="{{ item }}" state=latest
+  with_items: "{{gnome_packages}}"
+  sudo: yes
+
 - name: Setup numix theme
   command: gsettings set org.gnome.desktop.interface gtk-theme "Numix"
   command: gsettings set org.gnome.desktop.wm.preferences theme "Numix"
