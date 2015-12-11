@@ -11,9 +11,9 @@
     insertafter=EOF
     line="{{ item.line }}"
   with_items:
-    - { file: '/etc/profile', line: 'export PATH=$PATH:/usr/local/go/bin' }
-    - { file: '~/.bashrc', line: 'export PATH=$PATH:$HOME/go' }
-    - { file: '~/.bashrc', line: 'export GOPATH=$HOME/go'}
+    - { file: "/etc/profile", line: "export PATH=$PATH:/usr/local/go/bin" }
+    - { file: "~/.bashrc", line: "export PATH=$PATH:{{go_path}}" }
+    - { file: "~/.bashrc", line: "export GOPATH={{go_path}}"}
   sudo: yes
 
 

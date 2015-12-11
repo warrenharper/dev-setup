@@ -5,6 +5,3 @@
     - go
     - dotfiles
     - gnome
-
-  vars:
-    go_version: 1.5.1
