@@ -10,10 +10,11 @@
     dest="{{ item.file }}"
     insertafter=EOF
     line="{{ item.line }}"
+    follow=yes
   with_items:
     - { file: "/etc/profile", line: "export PATH=$PATH:/usr/local/go/bin" }
-    - { file: "~/.bashrc", line: "export PATH=$PATH:{{go_path}}" }
-    - { file: "~/.bashrc", line: "export GOPATH={{go_path}}"}
+    - { file: "{{ansible_env.HOME}}/.profile", line: "export PATH=$PATH:{{go_path}}/bin" }
+    - { file: "{{ansible_env.HOME}}/.profile", line: "export GOPATH={{go_path}}"}
   sudo: yes
 
 
