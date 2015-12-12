@@ -1,8 +1,9 @@
-- name: Install stow
+- name: Install dependencies
   apt:
     update_cache: yes
     state: latest
-    name: stow
+    name: "{{item}}"
+  with_items: "{{dotfiles_packages}}"
   sudo: yes
 
 
