@@ -3,6 +3,7 @@
     update_cache: yes
     state: latest
     name: "{{item}}"
+    force: yes
   with_items: "{{dotfiles_packages}}"
   sudo: yes
 
