@@ -3,14 +3,14 @@
 
 - name: Install GO
   command: tar -C /usr/local -xzf /tmp/go{{ go_version }}.linux-amd64.tar.gz
-  sudo: yes
+  become: yes
   
 - name: Add GOPATHS
   lineinfile:
-    dest="{{ item.file }}"
-    insertafter=EOF
-    line="{{ item.line }}"
-    follow=yes
+    dest: "{{ item.file }}"
+    insertafter: EOF
+    line: "{{ item.line }}"
+    follow: yes
   with_items:
     - { file: "/etc/profile", line: "export PATH=$PATH:/usr/local/go/bin" }
     - { file: "{{ansible_env.HOME}}/.profile", line: "export PATH=$PATH:{{go_path}}/bin" }
