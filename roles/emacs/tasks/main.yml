@@ -36,3 +36,6 @@
     src: Emacs-24.desktop
     dest: /usr/share/applications/
   sudo: yes
+
+- include: fonts.yml
+  
