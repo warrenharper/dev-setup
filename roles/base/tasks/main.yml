@@ -2,10 +2,10 @@
   apt_repository: repo={{ item }} update-cache=yes
   with_items: "{{ppa_repositories}}"
             
-  sudo: yes
+  become: yes
   
 - name: Install necessary packages
   apt: pkg="{{ item }}" state=latest update_cache=yes
   with_items: "{{packages}}"
-  sudo: yes
+  become: yes
   

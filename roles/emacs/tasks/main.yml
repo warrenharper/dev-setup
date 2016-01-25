@@ -2,7 +2,7 @@
   apt:
     name: emacs24
     state: build-dep
-  sudo: yes
+  become: yes
 
 - name: Get Emacs
   get_url:
@@ -29,13 +29,13 @@
   command: make install
   args:
     chdir: /tmp/emacs-24.5
-  sudo: yes
+  become: yes
 
 - name: Add Emacs to applications
   copy:
     src: Emacs-24.desktop
     dest: /usr/share/applications/
-  sudo: yes
+  become: yes
 
 - include: fonts.yml
   

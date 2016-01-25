@@ -15,7 +15,7 @@
     - { file: "/etc/profile", line: "export PATH=$PATH:/usr/local/go/bin" }
     - { file: "{{ansible_env.HOME}}/.profile", line: "export PATH=$PATH:{{go_path}}/bin" }
     - { file: "{{ansible_env.HOME}}/.profile", line: "export GOPATH={{go_path}}"}
-  sudo: yes
+  become: yes
 
 
 - name: Create GOPATH

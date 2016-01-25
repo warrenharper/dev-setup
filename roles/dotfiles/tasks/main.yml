@@ -5,7 +5,7 @@
     name: "{{item}}"
     force: yes
   with_items: "{{dotfiles_packages}}"
-  sudo: yes
+  become: yes
 
 
 - name: Get dotfiles
