@@ -2,7 +2,10 @@
   get_url: url=https://storage.googleapis.com/golang/go{{ go_version }}.linux-amd64.tar.gz dest=/tmp
 
 - name: Install GO
-  command: tar -C /usr/local -xzf /tmp/go{{ go_version }}.linux-amd64.tar.gz
+  unarchive:
+    copy: no
+    src: /tmp/go{{ go_version }}.linux-amd64.tar.gz
+    dest: /usr/local
   become: yes
   
 - name: Add GOPATHS
