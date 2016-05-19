@@ -1,0 +1,8 @@
+- hosts: dev
+  roles:
+    - dotfiles
+    - base
+    - emacs
+    - go   
+    - desktop
+    - gnome
