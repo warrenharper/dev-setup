@@ -30,4 +30,4 @@
   command: /usr/local/go/bin/go get {{item}}
   environment:
     GOPATH: "{{go_path}}"
-  with_items: go_packages
+  with_items: '{{ go_packages }}'

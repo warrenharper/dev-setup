@@ -2,9 +2,9 @@
   apt:
     update_cache: yes
     state: latest
-    name: "{{item}}"
+    name: "{{ item }}"
     force: yes
-  with_items: "{{dotfiles_packages}}"
+  with_items: "{{ dotfiles_packages }}"
   become: yes
 
 
@@ -21,8 +21,9 @@
     chdir: ~/dotfiles
 
 - name: Back up existing dotfiles
-  command: mv -f {{ansible_env.HOME}}/{{ item }} {{ansible_env.HOME}}/{{item}}.bak
-  with_items: potential_dotfiles.stdout_lines
+  command: mv -f '{{ ansible_env.HOME }}/{{ item }}' '{{ ansible_env.HOME }}/{{ item }}.bak'
+  creates: '{{ ansible_env.HOME }}/{{ item }}.bak'
+  with_items: '{{ potential_dotfiles.stdout_lines }}'
   ignore_errors: yes
 
 - name: Run stow on dotfiles
