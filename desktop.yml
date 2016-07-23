@@ -3,6 +3,7 @@
     - dotfiles
     - base
     - emacs
+    - fonts
     - go   
     - desktop
     - gnome

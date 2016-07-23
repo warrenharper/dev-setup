@@ -36,6 +36,4 @@
     src: Emacs-24.desktop
     dest: /usr/share/applications/
   become: yes
-
-- include: fonts.yml
   
