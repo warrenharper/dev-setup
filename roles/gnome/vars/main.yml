@@ -1,6 +1,7 @@
 gnome_ppa_repos:
   - ppa:satyajit-happy/themes
   - ppa:numix/ppa
+  - ppa:snwh/pulp
   
 gnome_packages:
   - gnome
@@ -13,3 +14,7 @@ gnome_packages:
   - numix-wallpaper-mr-numix
   - gnome-shell-extensions
   - gnome-shell-theme-elegance-colors
+  - paper-icon-theme
+  - paper-gtk-theme
+  - paper-cursor-theme
+  
