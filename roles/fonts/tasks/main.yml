@@ -1,14 +1,14 @@
 - name: Get fonts
   get_url: 
     url: '{{ item.url }}'
-    dest: /tmp/'{{ item.url | regex_replace("https://", "/") | basename }}'
+    dest: /tmp/'{{item.name}}.{{ item.url | regex_replace("https://", "/") | basename }}'
   with_items: '{{ fonts }}'
 
 - name: Unarchive fonts
   unarchive:
     copy: no
     dest: /tmp/
-    src: /tmp/'{{ item.url | regex_replace("https://", "/") | basename }}'
+    src: /tmp/'{{item.name}}.{{ item.url | regex_replace("https://", "/") | basename }}'
   with_items: '{{ fonts }}'
     
     

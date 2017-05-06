@@ -12,7 +12,7 @@ fonts:
 
   - name: SanFrancisco
     url: https://github.com/AppleDesignResources/SanFranciscoFont/archive/master.zip
-    fonts_dir: SanFransiscoFont-master
+    fonts_dir: SanFranciscoFont-master
     font_type: opentype
  
     
