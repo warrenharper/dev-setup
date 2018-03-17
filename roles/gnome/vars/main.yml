@@ -1,17 +1,13 @@
 gnome_ppa_repos:
-  - ppa:satyajit-happy/themes
   - ppa:numix/ppa
   - ppa:snwh/pulp
   
 gnome_packages:
   - gnome
   - gnome-tweak-tool
-  - shimmer-themes
-  - shimmer-wallpapers
   - numix-gtk-theme
   - numix-icon-theme
   - numix-icon-theme-circle
   - paper-icon-theme
-  - paper-gtk-theme
   - paper-cursor-theme
   

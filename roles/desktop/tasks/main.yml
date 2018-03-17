@@ -3,13 +3,3 @@
   with_items: "{{desktop_packages}}"
   become: yes
 
-- name: Make terminator config directory
-  file:
-    path: "{{terminator_location}}"
-    state: directory
-
-- name: Copy over terminator config
-  copy:
-    src: config
-    dest: "{{terminator_location}}"
-    

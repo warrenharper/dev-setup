@@ -2,7 +2,7 @@ packages:
   - openssh-server
   - python3
   - python-pip
-  - alien
+  - pkg-config
   - dpkg-dev
   - debhelper
   - build-essential
@@ -11,10 +11,10 @@ packages:
   - git-core
   - meld
   - nginx
-  - smbclient
   - curl
   - libcurl3
   - wget
   - software-properties-common
   - stow
   - emacs25
+  
