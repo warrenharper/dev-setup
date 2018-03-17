@@ -1,6 +1,6 @@
 [Desktop Entry]
 Version=1.0
-Name=Emacs-24
+Name=Emacs-25
 Exec=env UBUNTU_MENUPROXY=0 /usr/local/bin/emacs
 Terminal=false
 Icon=emacs

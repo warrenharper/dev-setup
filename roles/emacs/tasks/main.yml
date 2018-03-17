@@ -1,12 +1,12 @@
 - name: Emacs build-deps
   apt:
-    name: emacs24
+    name: emacs25
     state: build-dep
   become: yes
 
 - name: Get Emacs
   get_url:
-    url: http://ftp.gnu.org/gnu/emacs/emacs-24.5.tar.gz
+    url: http://ftp.gnu.org/gnu/emacs/emacs-25.3.tar.gz
     dest: /tmp/emacs.tar.gz
 
 - name: Untar emacs
@@ -18,22 +18,22 @@
 - name: Configure emacs build
   command: ./configure
   args:
-    chdir: /tmp/emacs-24.5
+    chdir: /tmp/emacs-25.3
 
 - name: Make emacs
   command: make
   args:
-    chdir: /tmp/emacs-24.5
+    chdir: /tmp/emacs-25.3
 
 - name: Install emacs
   command: make install
   args:
-    chdir: /tmp/emacs-24.5
+    chdir: /tmp/emacs-25.3
   become: yes
 
 - name: Add Emacs to applications
   copy:
-    src: Emacs-24.desktop
+    src: Emacs-25.desktop
     dest: /usr/share/applications/
   become: yes
   
