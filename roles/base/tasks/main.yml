@@ -1,9 +1,3 @@
-- name: Adds PPAS for package installation
-  apt_repository: repo={{ item }} update-cache=yes
-  with_items: "{{ppa_repositories}}"
-            
-  become: yes
-  
 - name: Install necessary packages
   apt: pkg="{{ item }}" state=latest update_cache=yes
   with_items: "{{packages}}"

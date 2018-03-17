@@ -1,0 +1,8 @@
+haskell_ppa_repositories:
+  - ppa:hvr/ghc
+
+haskell_packages:
+  - cabal-install-1.20
+  - ghc-7.8.4
+  - happy-1.19.5
+  - alex-3.1.4

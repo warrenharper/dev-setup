@@ -1,0 +1,11 @@
+- name: Add Haskell PPAS for package installation
+  apt_repository: repo={{ item }} update-cache=yes
+  with_items: "{{haskell_ppa_repositories}}"
+            
+  become: yes
+  
+- name: Install Haskell packages
+  apt: pkg="{{ item }}" state=latest update_cache=yes
+  with_items: "{{haskell_packages}}"
+  become: yes
+  
