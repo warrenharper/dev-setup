@@ -1,4 +1,4 @@
-go_version: 1.5.1
+go_version: "1.10"
 
 go_path: "{{ansible_env.HOME}}/go"
 

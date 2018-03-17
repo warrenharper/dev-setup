@@ -1,5 +1,7 @@
 - name: Get Go tar
-  get_url: url=https://storage.googleapis.com/golang/go{{ go_version }}.linux-amd64.tar.gz dest=/tmp
+  get_url:
+    url: "https://dl.google.com/go/go{{ go_version }}.linux-amd64.tar.gz"
+    dest: /tmp
 
 - name: Install GO
   unarchive:
