@@ -1,0 +1,2 @@
+- name: Get rustup
+  shell: /usr/bin/curl https://sh.rustup.rs -sSf | sh -s -- -y
