@@ -1,7 +1,6 @@
 - name: Add gnome specific ppas
   apt_repository: repo={{ item }} update-cache=yes
   with_items: "{{gnome_ppa_repos}}"
-            
   become: yes
   
 - name: Install necessary gnome_packages

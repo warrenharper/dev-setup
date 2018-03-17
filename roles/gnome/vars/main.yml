@@ -10,4 +10,4 @@ gnome_packages:
   - numix-icon-theme-circle
   - paper-icon-theme
   - paper-cursor-theme
-  
+  - arc-theme
