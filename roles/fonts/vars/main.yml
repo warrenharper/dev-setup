@@ -3,12 +3,16 @@ fonts:
     url: https://github.com/adobe-fonts/source-code-pro/archive/2.030R-ro/1.050R-it.tar.gz
     fonts_dir: source-code-pro-2.030R-ro-1.050R-it/OTF
     font_type: opentype
-    
 
   - name: SpaceMono
     url: https://github.com/googlefonts/spacemono/archive/master.zip
     fonts_dir: spacemono-master/fonts
     font_type: truetype
+
+  - name: FiraMono
+    url: https://github.com/mozilla/Fira/archive/4.202.zip
+    fonts_dir: Fira-4.202/otf
+    font_type: opentype
 
   - name: SanFrancisco
     url: https://github.com/AppleDesignResources/SanFranciscoFont/archive/master.zip
