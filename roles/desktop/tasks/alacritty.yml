@@ -1,0 +1,46 @@
+- name: Install Alacritty build dependcies
+  apt: pkg="{{ item }}" state=latest
+  with_items: "{{ alacritty_build_deps }}"
+  become: yes
+
+- name: Install Alacritty Terminal
+  command: "{{ ansible_env.HOME }}/.cargo/bin/cargo install --git https://github.com/jwilm/alacritty"
+
+- name: Pull down Alacritty source
+  git:
+    repo: "https://github.com/jwilm/alacritty"
+    dest: /tmp/alacritty
+    clone: yes
+
+- name: Install Alacritty's  desktop entry
+  copy:
+    src: /tmp/alacritty/Alacritty.desktop
+    dest: "{{ ansible_env.HOME }}/.local/share/applications/"
+    remote_src: yes
+
+- name: Make sure man1 exists
+  file:
+    path: /usr/local/share/man/man1
+    owner: root
+    group: root
+    state: directory
+  become: yes
+
+- name: Install Alacritty's man pages
+  shell: gzip -c /tmp/alacritty/alacritty.man > /usr/local/man/man1/alacritty.1.gz
+  become: yes
+
+- name: Make sure that bash_completion directory exists
+  file:
+    path: /usr/share/bash-completion/completions
+    state: directory
+    owner: root
+    group: root
+  become: yes
+
+- name: Install Alacritty's bash completion
+  copy:
+    src: /tmp/alacritty/alacritty-completions.bash
+    dest: /usr/share/bash-completion/completions/alacritty
+    remote_src: yes
+  become: yes

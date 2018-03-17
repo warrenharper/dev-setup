@@ -1,5 +1,13 @@
 desktop_packages:
   - firefox
   - libreoffice
+  - i3
   - dmenu
+
+alacritty_build_deps:
+  - gzip
+  - cmake
+  - libfreetype6-dev
+  - libfontconfig1-dev
+  - xclip
 

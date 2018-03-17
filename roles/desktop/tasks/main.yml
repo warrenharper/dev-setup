@@ -3,3 +3,4 @@
   with_items: "{{desktop_packages}}"
   become: yes
 
+- import_tasks: alacritty.yml
