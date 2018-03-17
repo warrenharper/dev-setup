@@ -17,3 +17,4 @@ packages:
   - wget
   - software-properties-common
   - stow
+  - emacs25
