@@ -1,34 +1,31 @@
-- name: Install dependencies
-  apt:
-    update_cache: yes
+---
+- name: Ensure stow is installed locally
+  package:
+    name: "{{ stow_pkg_name }}"
     state: latest
-    name: "{{ item }}"
-    force: yes
-  with_items: "{{ dotfiles_packages }}"
-  become: yes
-
-
-- name: Get dotfiles
+    
+- name: Ensure that dotfiles are cloned locally
   git:
-    repo: https://github.com/wrrn/dotfiles.git
-    dest: ~/dotfiles
+    repo: "{{ dotfiles_repo }}"
+    dest: "{{ dotfiles_local_path }}"
+    accept_hostkey: "{{ dotfiles_repo_accept_hostkey}}"
+  become: no
 
+- name: Find the dotfiles that need backed up
+  script: find_dotfiles.sh "{{ ansible_env.HOME }}" "{{ dotfiles_local_path }}"
+  register: existing_dotfiles
 
-- name: Register existing dotfiles to be stowed
-  command: find . -mindepth 2 -maxdepth 2 -not -path "./.git/*" -exec basename {} \;
-  register: potential_dotfiles
+- name: Backup the existing dotfiles
+  command: mv -n "{{ ansible_env.HOME }}/{{ item }}" '{{ ansible_env.HOME }}/{{ item }}.bak'
   args:
-    chdir: ~/dotfiles
+    creates: '{{ ansible_env.HOME }}/{{ item }}.bak'
+  with_items: "{{ existing_dotfiles.stdout_lines }}"
 
-- name: Back up existing dotfiles
-  command: mv -f '{{ ansible_env.HOME }}/{{ item }}' '{{ ansible_env.HOME }}/{{ item }}.bak'
-  creates: '{{ ansible_env.HOME }}/{{ item }}.bak'
-  with_items: '{{ potential_dotfiles.stdout_lines }}'
-  ignore_errors: yes
+- name: Use stow to install the dotfiles
+  shell: find "{{ dotfiles_local_path }}" -maxdepth 1 -type d -not -path {{ dotfiles_local_path }} -not -name .git -exec basename {} \; | xargs stow -t "{{ ansible_env.HOME }}" -d "{{ dotfiles_local_path }}"
+  
 
-- name: Run stow on dotfiles
-  shell: find .  -maxdepth 1 -type d -not -path . -not -name .git -exec basename {} \; | xargs stow
-  args:
-    chdir: ~/dotfiles
-
+  
+  
+  
     
