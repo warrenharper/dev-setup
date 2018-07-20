@@ -1,0 +1,93 @@
+---
+- name: Make sure that the homebrew prefix exists
+  file:
+    path: '{{ homebrew.prefix.path }}'
+    state: directory
+    owner: '{{ homebrew.prefix.owner }}'
+    group: '{{ homebrew.prefix.group}}'
+  when: homebrew.prefix.path != '/usr/local'
+
+- name: Clone Homebrew
+  git:
+    repo: https://github.com/homebrew/brew.git
+    dest: '{{ homebrew.prefix.path }}/Homebrew'
+    version: 'master'
+  become: yes
+
+- name: Create the directories homebrew depends on
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: '{{ homebrew.prefix.owner }}'
+    group: '{{ homebrew.prefix.group}}'
+    mode:  "u+rwx,g+rwx,o+rx"
+    recurse: yes
+  become: yes
+  with_items:
+    - /usr/local/Cellar
+    - /usr/local/Homebrew
+    - /usr/local/Frameworks
+    - /usr/local/include
+    - /usr/local/opt
+    - /usr/local/sbin
+    - /usr/local/share/zsh
+    - /usr/local/share/zsh/site-functions
+
+- name: Add homebrew to path
+  lineinfile:
+    insertbefore: BOF
+    line: '{{ item }}'
+    state: present
+    create: yes
+    path: '{{ shell_profile_path }}'
+  with_items:
+    - 'PATH={{ homebrew.prefix.path }}/Homebrew/bin:$PATH'
+    - 'PATH={{ homebrew.prefix.path }}/bin:$PATH'
+    
+
+- name: Add the taps
+  homebrew_tap:
+    name: '{{ item }}'
+    state: present
+  environment:
+    PATH: "{{ homebrew.prefix.path }}/Homebrew/bin:{{ansible_host.PATH}}"
+  with_items: '{{homebrew.taps}}'
+
+- name: Install the packages
+  homebrew:
+    path: "{{ homebrew.prefix.path }}/Homebrew/bin"
+    name: "{{ item.name }}"
+    install_options: "{{ item.install_options | default([]) | join , }}"
+    state: present
+  with_items: "{{ homebrew.packages }}"
+
+- name: Install Casks
+  homebrew_cask:
+    path: "{{ homebrew.prefix.path }}/Homebrew/bin"
+    name: "{{ item.name }}"  
+    install_options: '{{ item.install_options | default([]) }} + ["appdir={{homebrew.app_dir}}"]'
+    state: present
+  with_items: "{{ homebrew.casks }}"
+
+- name: Uninstall rust that was installed with rustup-init
+  homebrew:
+    state: absent
+    name: rust
+    path: "{{ homebrew.prefix.path }}/Homebrew/bin"
+
+- name: Run rustup
+  command: rustup-init -y
+  
+- name: Pull down alacritty
+  git:
+    repo: https://github.com/jwilm/alacritty.git
+    dest: /tmp/alacritty
+    version: 'master'
+    
+- name: Build alacritty
+  command: make app
+  args:
+    chdir: /tmp/alacritty
+
+- name: Copy Alacritty.App to the correct /Applications
+  command: cp -r /tmp/alacritty/target/release/osx/Alacritty.app /Applications/Alacritty.app

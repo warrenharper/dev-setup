@@ -1,0 +1,10 @@
+---
+- name: Set the defaults
+  osx_defaults:
+    domain: "{{ item.domain }}"
+    array_add: "{{ item.array_add | default('no') }}"
+    key: "{{ item.key }}"
+    type: "{{ item.type }}"
+    value: "{{ item.value }}"
+  with_items: "{{ macos_defaults }}"
+

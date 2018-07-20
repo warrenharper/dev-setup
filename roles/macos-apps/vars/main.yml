@@ -1,0 +1,46 @@
+---
+homebrew:
+  prefix:
+    path: /usr/local
+    owner: root
+    group: admin
+
+  taps:
+    - homebrew/cask
+    - homebrew/cask-versions
+    - homebrew/cask-fonts
+    
+  packages:
+    - name: coreutils
+    - name: rustup
+    - name: stow
+    - name: go
+    - name: git
+    - name: bash-completion
+    - name: tree
+    - name: gnu-sed
+      install_options: with-default-names # (**) This might not be the correct option
+    - name: awk                           # (**) This might not be the correct name
+      install_options: with-default-names # (**) This might not be the correct option
+    - name: jq
+
+  casks:
+    - name: emacs
+    - name: google-chrome
+    - name: firefox-developer-edition
+    - name: lastpass
+    - name: alfred
+    - name: gimp
+    - name: docker
+    - name: marshallofsound-google-play-music-player
+    - name: thunderbird
+    - name: keybase
+    - name: flux
+    - name: muzzle
+    - name: font-fira-mono
+    - name: spectacle
+
+  app_dir: "/Applications"
+    
+shell_profile_path: "{{ ansible_env.HOME }}/.profile.local"
+
