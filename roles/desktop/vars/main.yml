@@ -1,11 +1,13 @@
 desktop_ppas:
   - ppa:ubuntu-mozilla-daily/firefox-aurora
+  - ppa:nathan-renniewaldock/flux
 
 desktop_packages:
   - firefox
   - libreoffice
   - i3
   - dmenu
+  - fluxgui
 
 alacritty_build_deps:
   - gzip
