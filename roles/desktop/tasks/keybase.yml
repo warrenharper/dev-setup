@@ -1,0 +1,16 @@
+---
+- name: Fetch deb file
+  get_url:
+    url: https://prerelease.keybase.io/keybase_amd64.deb
+    dest: /tmp/keybase_amd64.deb
+
+- name: Install keybase deb file
+  apt:
+    deb: /tmp/keybase_amd64.deb
+  become: yes
+    
+
+- name: Fix missing keybase dependencies
+  command: apt-get install -y -f
+  become: yes
+  warning: false

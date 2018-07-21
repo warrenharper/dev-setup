@@ -9,3 +9,5 @@
   become: yes
 
 - import_tasks: alacritty.yml
+
+- import_tasks: keybase.yml
