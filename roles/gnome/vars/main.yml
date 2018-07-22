@@ -2,7 +2,7 @@ gnome_ppa_repos:
   - ppa:numix/ppa
   - ppa:snwh/pulp
   - ppa:dyatlov-igor/materia-theme
-  
+
 gnome_packages:
   - gnome
   - gnome-tweak-tool
@@ -12,7 +12,6 @@ gnome_packages:
   - paper-icon-theme
   - paper-cursor-theme
   - arc-theme
-  - materia-theme
 
 gnome_extension_ids:
   - 517  # Caffeine
