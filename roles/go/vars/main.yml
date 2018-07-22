@@ -1,6 +1,6 @@
-go_version: "1.10"
+go_version: "1.10.3"
 
-go_path: "{{ansible_env.HOME}}/go"
+go_path: "{{ansible_env.HOME}}/shed/go"
 
 go_packages:
   - golang.org/x/tools/cmd/goimports
