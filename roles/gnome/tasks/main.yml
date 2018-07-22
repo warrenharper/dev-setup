@@ -11,3 +11,5 @@
 - name: Install the gnome extensions
   include: extensions.yml gnome_extension_id="{{ item }}"
   with_items: "{{ gnome_extension_ids }}"
+
+- include: settings.yml

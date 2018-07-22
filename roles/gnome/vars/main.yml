@@ -20,3 +20,49 @@ gnome_extension_ids:
   - 545  # Hide top bar
   - 1131 # Desk changer (Wallpapers)
   - 723  # Pixel saver
+
+gnome_settings:
+  # Enable tap to click
+  - schema: org.gnome.desktop.peripherals.touchpad
+    key: tap-to-click
+    value: 'true'
+
+  # Remap caps to control
+  - schema: org.gnome.desktop.input-sources
+    key: xkb-options
+    value: "\"['ctrl:nocaps']\""
+
+  # Set the gtk-theme
+  - schema: org.gnome.desktop.interface
+    key: gtk-theme
+    value: "Arc-Dark"
+
+  # Set the icon-theme
+  - schema: org.gnome.desktop.interface
+    key: icon-theme
+    value: 'Paper'
+
+  # Set the cursor-theme
+  - schema: org.gnome.desktop.interface
+    key: cursor-theme
+    value: 'Paper'
+
+  # Set the interface font
+  - schema: org.gnome.desktop.interface
+    key: font-name
+    value: "'San Francisco Display 11'"
+
+  # Set monospace font
+  - schema: org.gnome.desktop.interface
+    key: monospace-font-name
+    value: "'Fira Mono 11'"
+
+  # Set the title bar font
+  - schema: org.gnome.desktop.wm.preferences
+    key: titlebar-font
+    value: "'San Francisco Display Ultra-Bold 11'"
+
+  # Set the shell user theme
+  - schema: org.gnome.shell.extensions.user-theme
+    key: name
+    value: 'Arc-Dark'
