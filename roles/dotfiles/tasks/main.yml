@@ -3,7 +3,8 @@
   package:
     name: "{{ stow_pkg_name }}"
     state: latest
-    
+  become: yes
+
 - name: Ensure that dotfiles are cloned locally
   git:
     repo: "{{ dotfiles_repo }}"
