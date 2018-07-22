@@ -1,0 +1,43 @@
+---
+- name: Get the gnome shell version
+  shell: gnome-shell --version | awk '{print $3}'
+  register: gnome_shell_version
+
+- debug:
+    var: gnome_shell_version.stdout
+
+- debug:
+    msg: "https://extensions.gnome.org/extension-info/?pk={{ gnome_extension_id }}&shell_version={{ gnome_shell_version.stdout }}"
+    
+- name: Get the gnome extension uuid
+  shell: curl "https://extensions.gnome.org/extension-info/?pk={{ gnome_extension_id }}&shell_version={{ gnome_shell_version.stdout }}" | jq -r .uuid
+  register: extension_uuid
+
+- debug:
+    var: extension_uuid.stdout
+
+- name: Fetch the download urls
+  shell: curl "https://extensions.gnome.org/extension-info/?pk={{ gnome_extension_id }}&shell_version={{ gnome_shell_version.stdout }}" | jq -r .download_url
+  register: extension_download_url
+
+- debug:
+    msg: "https://extensions.gnome.org{{ extension_download_url.stdout }}"
+
+- name: Fetch {{ extension_uuid.stdout }}
+  get_url:
+    url: "https://extensions.gnome.org{{ extension_download_url.stdout }}"
+    dest: "/tmp/{{ extension_uuid.stdout }}.zip"
+
+- name: Create "{{ extension_uuid.stdout }}" directory
+  file:
+    state: directory
+    path: "{{ ansible_env.HOME }}/.local/share/gnome-shell/extensions/{{ extension_uuid.stdout }}"
+
+- name: Install the {{ extension_uuid.stdout }}
+  unarchive:
+    src: "/tmp/{{ extension_uuid.stdout }}.zip"
+    dest: "{{ ansible_env.HOME }}/.local/share/gnome-shell/extensions/{{ extension_uuid.stdout }}"
+
+- name: Enable {{ extension_uuid.stdout }}
+  shell: gnome-shell-extension-tool -e $( echo "{{ extension_uuid.stdout}}" | cut -d @ -f 1 )
+  

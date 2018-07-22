@@ -13,3 +13,10 @@ gnome_packages:
   - paper-cursor-theme
   - arc-theme
   - materia-theme
+
+gnome_extension_ids:
+  - 517  # Caffeine
+  - 19   # User Themes
+  - 545  # Hide top bar
+  - 1131 # Desk changer (Wallpapers)
+  - 723  # Pixel saver
