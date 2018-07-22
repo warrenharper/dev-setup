@@ -4,11 +4,31 @@
     dest: /tmp/alacritty
     clone: yes
 
-- name: Build the cargo deb
-  command: cargo install cargo-deb
+- name: Install cargo-deb
+  command: cargo install cargo-deb --force
   args:
     chdir: /tmp/alacritty
+  environment:
+    PATH: "{{ansible_env.HOME}}/.cargo/bin:{{ ansible_env.PATH }}"
+
+- name: Add debug false to alacritty/Cargo.toml
+  lineinfile:
+    line: "debug = false"
+    regexp: "debug = 1"
+    path: /tmp/alacritty/Cargo.toml
+
+- name: Install depedencies
+  apt:
+    package: "{{ item }}"
+    update_cache: yes
+  with_items: "{{ alacritty_build_deps }}"
+  become: yes
 
 - name: Install the deb
   command: cargo deb --install
+  args:
+    chdir: /tmp/alacritty
+  environment:
+    PATH: "{{ansible_env.HOME}}/.cargo/bin:{{ ansible_env.PATH }}"
+    RUSTUP_TOOLCHAIN: stable
   become: yes
