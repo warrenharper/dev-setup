@@ -1,8 +1,12 @@
-- hosts: dev
+---
+- hosts: 127.0.0.1
+  connection: local
   roles:
     - dotfiles
     - base
+    - fonts
     - emacs
     - go   
     - desktop
     - gnome
+    - docker
